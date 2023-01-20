@@ -37,7 +37,7 @@ public class Main {
         System.out.println("Phone number:");
         String phoneNumber = sc.nextLine();
         if (phoneNumber.length() != 10) {
-            System.out.println("Wrong input!");
+            System.out.println("Invalid input!");
         } else {
             contactManagerApplication.addContact(name, phoneNumber);
         }
