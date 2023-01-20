@@ -1,10 +1,11 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
     private static final Scanner sc = new Scanner(System.in);
-    private static final ContactManagerApplication contactManagerApplication = new ContactManagerApplication("123456789");
+    private static final ContactManagerApplication contactManagerApplication = new ContactManagerApplication("123-456-7891");
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws FileNotFoundException {
 
         boolean exitRequested = false;
         while(!exitRequested) {
@@ -18,16 +19,14 @@ public class Main {
                     addContact();
                     break;
                 case 3:
-                    removeContact();
-                    break;
-                case 4:
                     searchContact();
                     break;
-                case 5:
-                    changeContact();
+                case 4:
+                    removeContact();
                     break;
-                case 6:
+                case 5:
                     exitRequested = true;
+                    System.out.println("Have a wonderful day!");
                     break;
             }
         }
@@ -43,32 +42,25 @@ public class Main {
             contactManagerApplication.addContact(name, phoneNumber);
         }
     }
+    private static void searchContact() {
+
+        System.out.println("Please enter name ");
+        String name = sc.nextLine();
+        if (contactManagerApplication.searchContactByName(name, name) == -1) {
+            System.out.println("No contact found with that name " + name);
+        } else {
+            contactManagerApplication.searchContactByName(name, name);
+        }
+    }
     private static void removeContact(){
         System.out.println("Which contact would you like to remove?" +"\n" +
-                "Please type phone number.");
+                "Please enter name.");
         String phoneNumber = sc.nextLine();
         contactManagerApplication.removeContact(phoneNumber);
-    }
-
-    private static void searchContact(){
-
-        System.out.println("Please enter phone number ");
-        String phoneNumber = sc.nextLine();
-        if(contactManagerApplication.searchContactByPhoneNumber(phoneNumber) == -1) {
-            System.out.println("No contact found with phone number " + phoneNumber);
-        } else {
-            contactManagerApplication.searchContactByPhoneNumber(phoneNumber);
         }
     }
 
-    private static void changeContact(){
-        System.out.println("Which contact would you like to modify?");
-        String currentName = sc.nextLine();
-        System.out.println("Enter your modify");
-        String updatedName = sc.nextLine();
-        contactManagerApplication.changeContact(currentName,updatedName);
-    }
-}
+
 
 
 
